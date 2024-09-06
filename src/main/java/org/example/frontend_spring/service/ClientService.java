@@ -1,17 +1,17 @@
 package org.example.frontend_spring.service;
 
-import org.example.frontend_spring.model.User;
+import org.example.frontend_spring.pojo.UserDTO;
 
 import java.util.List;
 
 public interface ClientService {
-    void addUser(User user);
+    void addUser(UserDTO user);
 
-    void updateUser(User user);
+    void updateUser(UserDTO user);
 
-    User findUserById(Long id);
+    UserDTO findUserById(Long id);
 
-    List<User> findAllUsers();
+    List<UserDTO> findAllUsers();
 
     void deleteUser(Long id);
 }

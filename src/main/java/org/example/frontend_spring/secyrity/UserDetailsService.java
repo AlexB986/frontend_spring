@@ -1,7 +1,7 @@
 package org.example.frontend_spring.secyrity;
 
-import org.example.frontend_spring.model.Role;
-import org.example.frontend_spring.model.User;
+import org.example.frontend_spring.pojo.RoleDTO;
+import org.example.frontend_spring.pojo.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,14 +23,14 @@ public class UserDetailsService implements org.springframework.security.core.use
     //    Поиск user в БД
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user =restTemplate.getForObject().findByUsername(username);
+        UserDTO user =restTemplate.getForObject().findByUsername(username);
         if(user == null){
             throw new UsernameNotFoundException(username);
         }
 //        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),user.getAuthorities());
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),getAuthorities(user.getRoles()));
     }
-    private Collection<? extends GrantedAuthority> getAuthorities(Collection<Role> roles) {
+    private Collection<? extends GrantedAuthority> getAuthorities(Collection<RoleDTO> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 }

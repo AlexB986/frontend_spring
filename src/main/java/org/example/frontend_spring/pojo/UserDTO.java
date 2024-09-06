@@ -1,11 +1,11 @@
-package org.example.frontend_spring.model;
+package org.example.frontend_spring.pojo;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Serializable {
+public class UserDTO implements Serializable {
 
 
     private Long id;
@@ -13,21 +13,19 @@ public class User implements Serializable {
     private String password;
     private String name;
     private Integer age;
+    private List<RoleDTO> roles;
 
-
-    private List<Role> roles;
-
-    public User() {
+    public UserDTO() {
     }
 
-    public User(String username, String password, String name, Integer age) {
+    public UserDTO(String username, String password, String name, Integer age) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.age = age;
     }
 
-    public void addUserToRole(Role role) {
+    public void addUserToRole(RoleDTO role) {
         if (roles == null) {
             roles = new ArrayList<>();
         }
@@ -74,11 +72,11 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public List<Role> getRoles() {
+    public List<RoleDTO> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<RoleDTO> roles) {
         this.roles = roles;
     }
 

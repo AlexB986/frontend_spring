@@ -1,6 +1,6 @@
 package org.example.frontend_spring.controller;
 
-import org.example.frontend_spring.model.User;
+import org.example.frontend_spring.pojo.UserDTO;
 import org.example.frontend_spring.service.ClientService;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +17,14 @@ public class ClientController {
         this.userService = userService;
     }
     @PostMapping("/users")
-    public String addUser(@RequestBody User user, ModelMap model) {
+    public String addUser(@RequestBody UserDTO user, ModelMap model) {
         userService.addUser(user);
         return "admin";
 
     }
 
     @PutMapping("/users")
-    public String updateUser(@RequestBody User user,ModelMap model) {
+    public String updateUser(@RequestBody UserDTO user, ModelMap model) {
         userService.updateUser(user);
         return "admin";
 
@@ -32,7 +32,7 @@ public class ClientController {
 
     @GetMapping("/users")
     public String findAllUsers(ModelMap model) {
-        List<User> userList = userService.findAllUsers();
+        List<UserDTO> userList = userService.findAllUsers();
         return "admin";
 
     }

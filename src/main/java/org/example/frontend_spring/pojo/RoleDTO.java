@@ -1,18 +1,18 @@
-package org.example.frontend_spring.model;
+package org.example.frontend_spring.pojo;
 
 
 import java.io.Serializable;
 
-public class Role implements Serializable {
+public class RoleDTO implements Serializable {
 
 
     public Long id;
     public String role;
 
-    public Role() {
+    public RoleDTO() {
     }
 
-    public Role(String role) {
+    public RoleDTO(String role) {
         this.role = role;
     }
 

@@ -1,6 +1,6 @@
 package org.example.frontend_spring.service;
 
-import org.example.frontend_spring.model.User;
+import org.example.frontend_spring.pojo.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -22,30 +22,30 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(UserDTO user) {
         String url = URL + "/users";
-        Map<String, User> request = new HashMap<>();
+        Map<String, UserDTO> request = new HashMap<>();
         request.put("user", user);
         // возвращает тело ответа
-        restTemplate.postForObject(url, request, User.class);
+        restTemplate.postForObject(url, request, UserDTO.class);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(UserDTO user) {
         String url = URL + "/users";
-        Map<String, User> request = new HashMap<>();
+        Map<String, UserDTO> request = new HashMap<>();
         request.put("user", user);
         restTemplate.put(url, request);
     }
 
     @Override
-    public User findUserById(Long id) {
+    public UserDTO findUserById(Long id) {
         String url = URL + "/users/" + id;
-        return restTemplate.getForObject(url, User.class);
+        return restTemplate.getForObject(url, UserDTO.class);
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<UserDTO> findAllUsers() {
         String url = URL + "/users";
         return restTemplate.getForObject(url, List.class);
 //        List<User> userList = restTemplate.getForObject(url, User.class);
