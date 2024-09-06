@@ -17,8 +17,9 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public ClientServiceImpl(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
+
+    public ClientServiceImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     @Override

@@ -23,11 +23,10 @@ public class UserDetailsService implements org.springframework.security.core.use
     //    Поиск user в БД
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDTO user =restTemplate.getForObject().findByUsername(username);
+        UserDTO user =restTemplate.getForObject("http://localhost:8080/",UserDTO.class);
         if(user == null){
             throw new UsernameNotFoundException(username);
         }
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),user.getAuthorities());
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),getAuthorities(user.getRoles()));
     }
     private Collection<? extends GrantedAuthority> getAuthorities(Collection<RoleDTO> roles) {
