@@ -1,8 +1,5 @@
 package org.example.frontend_spring.secyrity;
 
-
-
-import org.example.frontend_spring.ClientRepository.ClientRepository;
 import org.example.frontend_spring.model.Role;
 import org.example.frontend_spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -19,16 +17,13 @@ import java.util.stream.Collectors;
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private RestTemplate restTemplate;
 
-    public UserDetailsService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
 
     //    Поиск user в БД
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = clientRepository.findByUsername(username);
+        User user =restTemplate.getForObject().findByUsername(username);
         if(user == null){
             throw new UsernameNotFoundException(username);
         }

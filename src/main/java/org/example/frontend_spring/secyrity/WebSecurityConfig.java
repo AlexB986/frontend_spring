@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    //    Аутификация пользователя из БД
+//        Аутификация пользователя из БД
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authentcationProvider = new DaoAuthenticationProvider();
