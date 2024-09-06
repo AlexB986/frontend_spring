@@ -3,8 +3,6 @@ package org.example.frontend_spring.service;
 import org.example.frontend_spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserServiceImpl implements UserService {
-    private final String URL = "http://localhost:8080/admin";
+public class ClientServiceImpl implements ClientService {
+    private final String URL = "http://localhost:8080/client";
     @Autowired
     private RestTemplate restTemplate;
 
-    public UserServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public ClientServiceImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 

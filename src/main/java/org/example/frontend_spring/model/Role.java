@@ -1,8 +1,9 @@
 package org.example.frontend_spring.model;
 
 
+import java.io.Serializable;
 
-public class Role   {
+public class Role implements Serializable {
 
 
     public Long id;

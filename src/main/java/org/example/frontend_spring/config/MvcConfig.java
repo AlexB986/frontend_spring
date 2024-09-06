@@ -1,4 +1,4 @@
-package org.example.frontend_spring.secyrity;
+package org.example.frontend_spring.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

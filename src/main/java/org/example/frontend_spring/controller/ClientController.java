@@ -1,7 +1,7 @@
 package org.example.frontend_spring.controller;
 
 import org.example.frontend_spring.model.User;
-import org.example.frontend_spring.service.UserService;
+import org.example.frontend_spring.service.ClientService;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("client")
 public class ClientController {
 
-    private UserService userService;
+    private ClientService userService;
 
-    public ClientController(UserService userService) {
+    public ClientController(ClientService userService) {
         this.userService = userService;
     }
     @PostMapping("/users")

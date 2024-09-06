@@ -4,7 +4,7 @@ import org.example.frontend_spring.model.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface ClientService {
     void addUser(User user);
 
     void updateUser(User user);
