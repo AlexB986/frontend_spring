@@ -1,5 +1,6 @@
 package org.example.frontend_spring.secyrity;
 
+import org.example.frontend_spring.pojo.AvtorizationUserDTO;
 import org.example.frontend_spring.pojo.RoleDTO;
 import org.example.frontend_spring.pojo.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     //    Поиск user в БД
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDTO user =restTemplate.getForObject("http://localhost:8080/",UserDTO.class);
+        AvtorizationUserDTO user =restTemplate.getForObject("http://localhost:8080/admin/ver/" + username, AvtorizationUserDTO.class);
         if(user == null){
             throw new UsernameNotFoundException(username);
         }

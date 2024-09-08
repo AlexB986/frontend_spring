@@ -1,13 +1,16 @@
 package org.example.frontend_spring.controller;
 
+import org.example.frontend_spring.pojo.FullUserDTO;
 import org.example.frontend_spring.pojo.UserDTO;
 import org.example.frontend_spring.service.ClientService;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("client")
 public class ClientController {
 
@@ -16,36 +19,38 @@ public class ClientController {
     public ClientController(ClientService userService) {
         this.userService = userService;
     }
-    @PostMapping("/users")
-    public String addUser(@RequestBody UserDTO user, ModelMap model) {
+
+    @PostMapping("/add")
+    public String addUser(@RequestBody FullUserDTO user, ModelMap model) {
         userService.addUser(user);
         return "admin";
 
     }
 
-    @PutMapping("/users")
-    public String updateUser(@RequestBody UserDTO user, ModelMap model) {
+    @PutMapping("/id")
+    public String updateUser(@RequestBody FullUserDTO user, ModelMap model) {
         userService.updateUser(user);
         return "admin";
 
     }
 
-    @GetMapping("/users")
+    @GetMapping("/read")
     public String findAllUsers(ModelMap model) {
         List<UserDTO> userList = userService.findAllUsers();
-        return "admin";
+        return "user";
 
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/read/id")
     public String findUserById(@PathVariable Long id,ModelMap model) {
         userService.findUserById(id);
         return "admin";
 
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/delete/id")
     public String deleteUserById(@PathVariable Long id,ModelMap model) {
+        userService.deleteUser(id);
         return "admin";
 
     }
