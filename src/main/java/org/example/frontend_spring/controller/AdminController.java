@@ -3,7 +3,6 @@ package org.example.frontend_spring.controller;
 import org.example.frontend_spring.pojo.FullUserDTO;
 import org.example.frontend_spring.pojo.UserDTO;
 import org.example.frontend_spring.service.ClientService;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -11,47 +10,50 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("client")
-public class ClientController {
+@RequestMapping("admin")
+public class AdminController {
 
     private ClientService userService;
 
-    public ClientController(ClientService userService) {
+    public AdminController(ClientService userService) {
         this.userService = userService;
     }
 
-    @PostMapping("/add")
-    public String addUser(@RequestBody FullUserDTO user, ModelMap model) {
-        userService.addUser(user);
+    @GetMapping("/")
+    public String index(ModelMap model) {
         return "admin";
-
+    }
+    @PostMapping("/add")
+    public String addUser(@ModelAttribute FullUserDTO user, ModelMap model) {
+        userService.addUser(user);
+        return "Admin_add";
     }
 
     @PutMapping("/id")
-    public String updateUser(@RequestBody FullUserDTO user, ModelMap model) {
+    public String updateUser(@ModelAttribute FullUserDTO user, ModelMap model) {
         userService.updateUser(user);
-        return "admin";
+        return "Admin_update";
 
     }
 
     @GetMapping("/read")
     public String findAllUsers(ModelMap model) {
         List<UserDTO> userList = userService.findAllUsers();
-        return "user";
+        return "Admin_Find_All";
 
     }
 
     @GetMapping("/read/id")
     public String findUserById(@PathVariable Long id,ModelMap model) {
         userService.findUserById(id);
-        return "admin";
+        return "Admin_Find_Id";
 
     }
 
     @DeleteMapping("/delete/id")
     public String deleteUserById(@PathVariable Long id,ModelMap model) {
         userService.deleteUser(id);
-        return "admin";
+        return "Admin_Delete";
 
     }
 
