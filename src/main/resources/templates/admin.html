@@ -14,19 +14,17 @@
     <button type="submit">Add User</button>
 </form>
 <br><br>
-<form th:action = "@{/admin/delet/id}" method="get" >
-    <button type="submit">Delete User</button>
+<br><br>
+<form th:action="@{/admin/read/id}" method="get">
+    <input type="number" id="id" name="id" required/>
+    <input type="submit" value="Find by ID"/>
 </form>
 <br><br>
-<form th:action = "@{/admin/read/id}" method="get" >
-    <button type="submit">Find by id</button>
-</form>
-<br><br>
-<form th:action = "@{/admin/read}" method="get" >
+<form th:action = "@{/admin/reads}" method="get" >
     <button type="submit">Find all user</button>
 </form>
 <br><br>
-<form th:action = "@{/admin/id}" method="post" >
+<form th:action = "@{/admin/id}" method="put" >
     <button type="submit">Update user</button>
 </form>
 <br><br>
@@ -34,6 +32,9 @@
 <form th:action = "@{/logout}" method="post">
     <button type="submit">Logout</button>
 </form>
-
+<form th:action="@{/admin/delete/id}" method="post">
+    <input type="number" id="id" name="id" required/>
+    <input type="submit" value="Delete User"/>
+</form>
 </body>
 </html>

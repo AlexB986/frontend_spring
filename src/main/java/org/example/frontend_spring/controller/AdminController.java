@@ -23,34 +23,37 @@ public class AdminController {
     public String index(ModelMap model) {
         return "admin";
     }
+
     @PostMapping("/add")
     public String addUser(@ModelAttribute FullUserDTO user, ModelMap model) {
         userService.addUser(user);
         return "Admin_add";
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public String updateUser(@ModelAttribute FullUserDTO user, ModelMap model) {
         userService.updateUser(user);
         return "Admin_update";
 
     }
 
-    @GetMapping("/read")
+    @GetMapping("/reads")
     public String findAllUsers(ModelMap model) {
         List<UserDTO> userList = userService.findAllUsers();
+        model.addAttribute("userDTO",userList);
         return "Admin_Find_All";
 
     }
 
-    @GetMapping("/read/id")
-    public String findUserById(@PathVariable Long id,ModelMap model) {
-        userService.findUserById(id);
-        return "Admin_Find_Id";
+    @GetMapping("/read/{id}")
+    public String findUserById(@RequestParam("id") Long id,ModelMap model) {
+        UserDTO findUser = userService.findUserById(id);
+        model.addAttribute("userDTO",findUser);
+        return "Admin_Find_id";
 
     }
 
-    @DeleteMapping("/delete/id")
+    @DeleteMapping("/delete/{id}")
     public String deleteUserById(@PathVariable Long id,ModelMap model) {
         userService.deleteUser(id);
         return "Admin_Delete";

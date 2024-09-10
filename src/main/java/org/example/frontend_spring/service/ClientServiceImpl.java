@@ -3,15 +3,14 @@ package org.example.frontend_spring.service;
 import org.example.frontend_spring.pojo.FullUserDTO;
 import org.example.frontend_spring.pojo.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -50,18 +49,21 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<UserDTO> findAllUsers() {
-        List<UserDTO> users = new ArrayList<>();
         String url = URL + "/read";
-//        return restTemplate.getForObject(url, List.class);
-       UserDTO userList = restTemplate.getForObject(url, UserDTO.class);
-       users.add(userList);
-        return users;
-    }
+        ResponseEntity<List<UserDTO>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<UserDTO>>() {}
+        );
+        System.out.println(response.getBody());
+        return response.getBody();
 
+    }
 
     @Override
     public void deleteUser(Long id) {
-        String url = URL + "/delete/"+id;
+        String url = URL + "/delete/" + id;
         restTemplate.delete(url);
     }
 }
