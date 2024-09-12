@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("admin")
 public class AdminController {
 
     private ClientService userService;
@@ -73,10 +73,5 @@ public class AdminController {
         return "redirect:/admin/reads";
 
     }
-    @GetMapping("/read/full/{id}")
-    public String findFullUserById(@RequestParam("id") Long id, ModelMap model) {
-        FullUserDTO findUser = userService.findFullUserById(id);
-        model.addAttribute("fulluserDTO", findUser);
-        return "Admin_Find_id";
-    }
+
 }
