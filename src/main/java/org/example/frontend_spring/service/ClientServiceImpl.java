@@ -46,6 +46,7 @@ public class ClientServiceImpl implements ClientService {
         return restTemplate.getForObject(url, UserDTO.class);
     }
 
+
     @Override
     public List<UserDTO> findAllUsers() {
         String url = URL + "/read";

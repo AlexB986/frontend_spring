@@ -12,6 +12,7 @@ public interface ClientService {
 
     UserDTO findUserById(Long id);
 
+
     List<UserDTO> findAllUsers();
 
     void deleteUser(Long id);
