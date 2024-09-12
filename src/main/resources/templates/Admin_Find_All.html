@@ -15,6 +15,8 @@
         <th>Name</th>
         <th>Age</th>
         <th>Roles</th>
+        <th>Delete</th>
+        <th>Update</th>
     </tr>
     </thead>
     <tbody>
@@ -27,9 +29,22 @@
                 <li th:each="role : ${user.roles}" th:text="${role.role}">Role</li>
             </ul>
         </td>
+        <td>
+            <form th:action="@{/admin/delete/{id}(id=${user.getId()})}" th:method="delete">
+                <input type="submit" value="Delete User"/>
+            </form>
+        </td>
+        <td>
+            <form th:action = "@{/admin/form/update/{id}(id=${user.getId()})}" th:method="get">
+                <a th:href="@{/admin/form/update/{id}(id=${user.getId()})}" >Update</a>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
+<form th:action="@{/admin/form}" method="get" >
+    <a th:href="@{/admin/form}">Add New User</a>
+</form>
 
 <br>
 <form th:action="@{/logout}" method="post">

@@ -6,14 +6,9 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-
 <br><br>
 <h1>Admin, welcome spring boot security page!</h1>
 <br>
-<form th:action="@{/admin/add}" method="post" >
-    <button type="submit">Add User</button>
-</form>
-<br><br>
 <br><br>
 <form th:action="@{/admin/read/id}" method="get">
     <input type="number" id="id" name="id" required/>
@@ -24,17 +19,10 @@
     <button type="submit">Find all user</button>
 </form>
 <br><br>
-<form th:action = "@{/admin/id}" method="put" >
-    <button type="submit">Update user</button>
-</form>
-<br><br>
-
+<br>
 <form th:action = "@{/logout}" method="post">
     <button type="submit">Logout</button>
 </form>
-<form th:action="@{/admin/delete/id}" method="post">
-    <input type="number" id="id" name="id" required/>
-    <input type="submit" value="Delete User"/>
-</form>
+
 </body>
 </html>

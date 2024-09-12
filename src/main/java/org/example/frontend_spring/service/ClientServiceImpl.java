@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,6 +20,8 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public ClientServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -27,18 +30,14 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void addUser(FullUserDTO user) {
         String url = URL + "/add";
-        Map<String, FullUserDTO> request = new HashMap<>();
-        request.put("user", user);
-        // возвращает тело ответа
-        restTemplate.postForObject(url, request, FullUserDTO.class);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        restTemplate.postForObject(url, user, FullUserDTO.class);
     }
 
     @Override
-    public void updateUser(FullUserDTO user) {
-        String url = URL + "/id";
-        Map<String, FullUserDTO> request = new HashMap<>();
-        request.put("user", user);
-        restTemplate.put(url, request);
+    public void updateUser(UserDTO user, Long id) {
+        String url = URL + "/update/" + id;
+         restTemplate.put(url, user);
     }
 
     @Override
@@ -54,7 +53,8 @@ public class ClientServiceImpl implements ClientService {
                 url,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<UserDTO>>() {}
+                new ParameterizedTypeReference<List<UserDTO>>() {
+                }
         );
         System.out.println(response.getBody());
         return response.getBody();

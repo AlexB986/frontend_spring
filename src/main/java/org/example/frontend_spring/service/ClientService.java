@@ -8,7 +8,7 @@ import java.util.List;
 public interface ClientService {
     void addUser(FullUserDTO user);
 
-    void updateUser(FullUserDTO user);
+    void updateUser(UserDTO user,Long id);
 
     UserDTO findUserById(Long id);
 

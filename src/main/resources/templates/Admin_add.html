@@ -3,28 +3,35 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Spring Security Example</title>
+    <title>Добавление пользователя</title>
 </head>
 <body>
-<h1>Admin add</h1>
-<form th:action="@{/admin/add}" method="post">
+<h1>Добавить пользователя</h1>
+<form th:action="@{/admin/add}" th:method="post" th:object="${user}">
+    <label for="username">Имя пользователя:</label>
+    <input type="text" id="username" name="username" th:field="${user.username}" required/>
+    <br/><br/>
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" th:field="${user.password}" required/>
+    <br/><br/>
+
     <label for="name">Имя:</label>
-    <input type="text" id="name" name="name" required/>
-    <label for="name">Username:</label>
-    <input type="text" id="username" name="username" required/>
-    <label for="name">Пароль:</label>
-    <input type="text" id="password" name="password" required/>
+    <input type="text" id="name" name="name" th:field="${user.name}" required/>
+    <br/><br/>
+
     <label for="age">Возраст:</label>
-    <input type="number" id="age" name="age" required/>
+    <input type="number" id="age" name="age" th:field="${user.age}" required/>
+    <br/><br/>
+
     <label for="role">Роль:</label>
-    <input type="text" id="role" name="role" required/>
+    <input type="text" id="role" name="role" th:field="${user.roles}" required>
+<!--    <select id="roles" name="roles" th:field="${user.roles}">-->
+<!--        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"></option>-->
+<!--    </select>-->
+    <br/><br/>
 
-    <input type="submit" value="Добавить"/>
-</form>
-
-<br>
-<form th:action = "@{/logout}" method="post">
-    <button type="submit">Logout</button>
+    <input type="submit" value="Добавить пользователя"/>
 </form>
 
 </body>
