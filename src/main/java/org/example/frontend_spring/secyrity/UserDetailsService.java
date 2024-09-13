@@ -26,6 +26,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         AvtorizationUserDTO user =restTemplate.getForObject("http://localhost:8080/admin/ver/" + username, AvtorizationUserDTO.class);
         if(user == null){
             throw new UsernameNotFoundException(username);
+
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),getAuthorities(user.getRoles()));
     }
